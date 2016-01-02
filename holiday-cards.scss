@@ -1,0 +1,408 @@
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script:700|Berkshire+Swash);
+*{
+  outline: none;
+}
+html, body{
+  padding: 0;
+  margin: 0;
+  z-index:-2;
+}
+@each $class, $color in (ca32c28, #a32c28), (c7b8055, #7b8055), (cbca875, #bca875), (cffffff, #ffffff), (c384030, #384030), (cc6ddf2, #c6ddf2), (c475d82, #475d82), (cdaa520, #daa520){
+    body.#{$class}{
+      #cardform{
+        h3{
+          color: $color;
+        }
+        #exit{
+          color: (lighten($color, 25%));
+          &:hover{
+            color: $color!important;
+          }
+        }
+      }
+      input[type="submit"]{
+        clear: both;
+        position: relative;
+        float: left;
+        margin-top: 20px;
+        border-radius: 0;
+        font-family: sans-serif;
+        background: $color;
+        border: 0;
+        color: #FFF;
+        font-size: 16px;
+        padding: 15px 20px;
+      }
+      ::-webkit-input-placeholder {
+         color: rgba(lighten($color, 15%), 0.75);
+      }
+
+      :-moz-placeholder { /* Firefox 18- */
+         color: rgba(lighten($color, 15%), 0.75);  
+      }
+
+      ::-moz-placeholder {  /* Firefox 19+ */
+         color: rgba(lighten($color, 15%), 0.75);  
+      }
+
+      :-ms-input-placeholder {  
+         color: rgba(lighten($color, 15%), 0.75);  
+      }
+      #card-body{
+        background: #{$color}!important;
+        &.x1 #greetings{
+          background: darken($color, 15%)!important;
+        }
+        &.x3 #greetings{
+          background: darken($color, 15%)!important;
+        }
+      }
+    }
+  }
+#choice-bar{
+  background: rgba(0,0,0,0.6);
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+  z-index: 30000;
+  li{
+    display: inline-block;
+    a{
+      text-decoration: none;
+      color: #fff;
+      display: inline-block;
+      padding: 10px;
+      &:after{
+        width: 0; 
+        height: 0; 
+        content: '';
+        display: block;
+        float: right;
+        margin-top: 7px;
+        margin-left: 7px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #FFF;
+      }
+      &:hover{
+        color: #888;
+        &:after{
+          border-top: 5px solid #888;
+        }
+      }
+    }
+  }
+  ul{
+    margin: 0 0 0 -10px;
+    padding: 5px 10px 10px;
+    list-style: none;
+    position: absolute;
+    background: #000;
+    min-width: 150px;
+    display: none;
+    li{
+      color: #fff;
+      padding: 5px;
+      &#berkshire{
+        font-family: 'Berkshire Swash', cursive;
+      }
+      &#dancing{
+        font-family: 'Dancing Script', cursive;
+      }
+      &:hover{
+        color: #888;
+      }
+    }
+  }
+}
+#card-body{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border: 0!important;
+}
+div{
+  overflow: hidden;
+  &.x1{
+    margin: 3% 5%;
+    border: 3px solid #FFF;
+    height: 90%;
+    width: 90%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &.x2{
+    margin: 30px;
+    border: 3px solid #FFF;
+    height: 50%;
+    width: 46.25%;
+    box-sizing: border-box;
+    position: absolute;
+    &:first-of-type{
+        margin-right: 15px;
+        left: 0;
+        top: 0;
+      }
+      &:last-of-type{
+        margin-left: 15px;
+        right: 0;
+        bottom: 0;
+      }
+  }
+  &.x3{
+    margin: 1%;
+    border: 3px solid #FFF;
+    width: 31.33%;
+    height: 98%;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+  }
+  &.x4{
+    margin: 20px;
+    border: 3px solid #FFF;
+    height: 40%;
+    box-sizing: border-box;
+    position: absolute;
+    &:first-of-type{
+      margin-right: 0;
+      width: 63%;
+      top: 0;
+    }
+    &:nth-of-type(2){
+      width: 30%;
+      right: 0;
+      top: 0;
+    }
+    &:nth-of-type(3){
+      width: 30%;
+      bottom: 0px;
+    }
+    &:nth-of-type(4){
+      width: 63%;
+      left: 0;
+      top: 0;
+    }
+    &:last-of-type{
+      bottom: 0px;
+      right: 0;
+      width: 63%;
+    }
+  }
+}
+#hide-bar, #show-bar{
+  position: absolute;
+  right: 0;
+  margin: 10px;
+  text-decoration: none;
+  color: #FFF;
+  z-index: 2000000;
+}
+#finished,#edit{
+  position: absolute;
+  color: #fff;
+  top:0;
+  right: 125px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+#edit{
+  right: 10px;
+}
+#greetings{
+  position: absolute;
+  top: 60%;
+  border: 0;
+  margin: 0px 5%;
+  padding: 20px 0;
+  width: 90%;
+  left: 0;
+  box-sizing: border-box;
+  font-size: 40px;
+  font-family: inherit;
+  z-index: 2000000;
+  color: #FFF;
+  .x4>&{
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0);
+    width: 96%;
+    margin: 0 2%;
+  }
+  .x1>&{
+    position: absolute;
+    bottom: 5%;
+    top: auto!important;
+    padding: 0.5em;
+    font-size: 5em;
+    border-left: 3px solid #FFF;
+    border-bottom: 3px solid #FFF;
+    border-right: 3px solid #FFF;
+    resize: none;
+  }
+  .x1 &{
+    padding: 0.75em;
+    padding-bottom: 0!important;
+  }
+  .x2>&{
+    width: 45%;
+    background: rgba(0,0,0,0);
+    resize: none;
+    height: 35%;
+    font-size: 6.5em;
+  }
+  .x1 &.two-lines{
+    font-size: 4em;
+    padding-bottom: 0em!important;
+  }
+  .x1 &.two-real-lines{
+    font-size: 4em;
+    padding-bottom: 0.75em!important;
+  }
+  .x1.dancing &{
+    font-size: 5.5em;
+  }
+  .x1.dancing &.two-lines{
+    font-size: 5em!important;
+  }
+}
+.x1 > #divider{
+  width: 90%;
+  margin: 0 5%;
+  height: 10px;
+  position: absolute;
+  z-index: 2000001;
+  background-image: url(http://192.185.4.38/~acj/codepen/assets/holiday-card/border-image.png);
+}
+.berkshire{
+  font-family: 'Berkshire Swash', cursive;
+}
+.dancing{
+  font-family: 'Dancing Script', cursive;
+  line-height: 0.5em!important;
+  padding-top: 0.9em!important;
+}
+canvas{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+}
+#backgrounds{
+  li{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #FFF;
+    display: inline-block;
+    margin: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    &#pic1{
+      background-image: url(http://192.185.4.38/~acj/codepen/assets/holiday-card/crossPattern.png);
+    }
+    &#pic2{
+      background-image: url(http://192.185.4.38/~acj/codepen/assets/holiday-card/snowfall.png);
+    }
+    &#pic3{
+      background-image: url(http://192.185.4.38/~acj/codepen/assets/holiday-card/velvetPattern-red.png);
+    }
+    &#pic4{
+      background-image: url(http://192.185.4.38/~acj/codepen/assets/holiday-card/velvetPattern-blue.png);
+    }
+  }
+}
+#bgimg{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.x2{
+  &.berkshire{
+    #greetings{
+      &.two-lines{
+        font-size: 5.5rem!important;
+      }
+      &.two-real-lines{
+        font-size: 3.5rem!important;
+      }
+    }
+  }
+  &.dancing{
+    #greetings{
+      &.two-lines{
+        font-size: 5.5rem!important;
+      }
+      &.two-real-lines{
+        font-size: 4.5rem!important;
+      }
+    }
+  }
+}
+.x3{
+  #greetings{
+    width: 98%;
+    margin: 0 1%;
+    padding: 30px;
+  }
+}
+#savecard{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  #backdrop{
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  #cardform{
+    background: #FFF;
+    width: 40%;
+    position: relative;
+    float: left;
+    padding: 2%;
+    left: 50%;
+    margin-left: -21%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  label{
+    clear: left;
+    position: relative;
+    float:left;
+    margin-top: 20px;
+  }
+  input[type="text"]{
+    clear: right;
+    position: relative;
+    float:left;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+  #exit{
+    position: relative;
+    float: right;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: -13px;
+    
+  }
+}
