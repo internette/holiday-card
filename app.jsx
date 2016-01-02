@@ -25,10 +25,10 @@ App = React.createClass({
   },
   getPicsList(){
     return[
-      { id: 'x1', label: "One Picture", class: "pictures" },
-      { id: 'x2', label: "Two Pictures", class: "pictures" },
-      { id: 'x3', label: "Three Pictures", class: "pictures" },
-      { id: 'x4', label: "Four Pictures", class: "pictures" }
+      { id: 'x1', count: 1, label: "One Picture", class: "pictures" },
+      { id: 'x2', count: 2, label: "Two Pictures", class: "pictures" },
+      { id: 'x3', count: 3, label: "Three Pictures", class: "pictures" },
+      { id: 'x4', count: 4, label: "Four Pictures", class: "pictures" }
     ];
   },
   getFontsList(){
@@ -47,7 +47,7 @@ App = React.createClass({
   },
   renderPics(){
     return this.getPicsList().map((link) => {
-      return <Wrap><Link key={link.id} link={link} text={link.label}/></Wrap>;
+      return <Wrap><Image key={link.id} image={link} text={link.label}/></Wrap>;
     });
   },
   renderFonts(){
@@ -57,7 +57,7 @@ App = React.createClass({
   },
   renderImages(){
     return this.getBGs().map((image) => {
-      return <Wrap><Image key={image.id} image={image}/></Wrap>;
+      return <Wrap><BG key={image.id} image={image}/></Wrap>;
     });
   },
   renderLinks() {

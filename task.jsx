@@ -22,7 +22,7 @@ Link = React.createClass({
     );
   }
 });
-Image = React.createClass({
+BG = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.
     // We can use propTypes to indicate it is required
@@ -35,6 +35,26 @@ Image = React.createClass({
   render: function() {
     return (
       <a href="#" id={this.props.image.id} onClick={this.changeBG}></a>
+    );
+  }
+});
+Image = React.createClass({
+  propTypes: {
+    // This component gets the task to display through a React prop.
+    // We can use propTypes to indicate it is required
+    image: React.PropTypes.object.isRequired
+  },
+  renderImg: function(e,f) {
+    e.preventDefault();
+    for(var i=0; i<this.props.image.count; i++){
+      var newDiv = document.createElement('div');
+      newDiv.className=this.props.image.id;
+      document.getElementById('card-body').appendChild(newDiv);
+    }
+  },
+  render: function() {
+    return (
+      <a href="#" id={this.props.image.id} onClick={this.renderImg}>{this.props.image.label}</a>
     );
   }
 });
@@ -66,8 +86,8 @@ ImageCont = React.createClass({
     imageCont: React.PropTypes.object.isRequired
   },
   render: function() {
-    for(var i=0; i<this.props.image.amount; i++){
-      return (<div class={this.props.image.class}></div>);
+    for(var i=0; i<this.props.image.count; i++){
+      return (<div class={this.props.image.id} ></div>);
     }
   }
 });
