@@ -111,7 +111,14 @@ html, body{
     display: none;
     li{
       color: #fff;
-      padding: 5px;
+      padding: 0px;
+      display: block;
+      clear: both;
+      a{
+        &:after{
+          border: 0!important;
+        }
+      }
       &#berkshire{
         font-family: 'Berkshire Swash', cursive;
       }

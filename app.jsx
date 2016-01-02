@@ -19,7 +19,8 @@ App = React.createClass({
       { id: 'hide-bar', label: "Hide Bar", class: "toplevel" },
       { id: 'choose-amount', label: "Choose Picture Amount", class: "toplevel" },
       { id: 'choose-font', label: "Choose Font", class: "toplevel" },
-      { id: 'choose-bg', label: "Choose Background", class: "toplevel" }
+      { id: 'choose-bg', label: "Choose Background", class: "toplevel" },
+      { id: 'custom-color', label: "Choose BG Color", class: "toplevel" }
     ];
   },
   getPicsList(){
@@ -67,6 +68,8 @@ App = React.createClass({
           return <Wrap id="fonts"><Link key={link.id} link={link} text={link.label}/><ul id={link.id}>{this.renderFonts()}</ul></Wrap>;
         } else if(link.class === 'toplevel' && link.id==='choose-bg'){
           return <Wrap id="bgs"><Link key={link.id} link={link} text={link.label}/><ul id={link.id}>{this.renderImages()}</ul></Wrap>;
+        } else if (link.class === 'toplevel' && link.id === 'custom-color'){
+          return <ColorPicker key={link.id} picker={link}/>
         } else if (link.class === 'toplevel'){
           return <Link key={link.id} link={link} text={link.label}/>;
         }

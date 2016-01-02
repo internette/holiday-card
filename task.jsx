@@ -38,6 +38,27 @@ Image = React.createClass({
     );
   }
 });
+ColorPicker = React.createClass({
+  propType: {
+    picker: React.PropTypes.object.isRequired
+  },
+  componentDidMount: function(){
+    $("#custom-color").spectrum({
+        showPaletteOnly: true,
+        showPalette: true,
+        showInput: true,
+        allowEmpty:true,
+        palette:['#A32C28','#7B8055', '#BCA875', 'white', "#384030", "C6DDF2", "#475D82", "goldenrod"],
+        change:function(color){
+          backgroundColor = color.toHexString();
+          $('body').attr('class', 'c'+backgroundColor.replace('#',''));
+        }
+    });
+  },
+  render: function(){
+    return <input id={this.props.picker.id} type="text"/>
+  }
+});
 ImageCont = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.
