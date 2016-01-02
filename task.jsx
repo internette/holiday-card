@@ -7,7 +7,14 @@ Link = React.createClass({
   },
   showDropdown: function(e,f) {
     e.preventDefault();
-    console.log(this.props.link);
+    for(var i=0; i<document.querySelectorAll('#choice-bar ul').length; i++){
+      document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
+    }
+    if(document.querySelector('ul#'+this.props.link.id).style.display === 'block'){
+      document.querySelector('ul#'+this.props.link.id).style.display = 'none';
+    } else {
+      document.querySelector('ul#'+this.props.link.id).style.display = 'block';
+    }
   },
   render: function() {
     return (
@@ -21,9 +28,25 @@ Image = React.createClass({
     // We can use propTypes to indicate it is required
     image: React.PropTypes.object.isRequired
   },
+  changeBG: function(e,f) {
+    e.preventDefault();
+    document.getElementById('bgimg').className = this.props.image.id;
+  },
   render: function() {
     return (
-      <a href="#" id={this.props.image.id}></a>
+      <a href="#" id={this.props.image.id} onClick={this.changeBG}></a>
     );
+  }
+});
+ImageCont = React.createClass({
+  propTypes: {
+    // This component gets the task to display through a React prop.
+    // We can use propTypes to indicate it is required
+    imageCont: React.PropTypes.object.isRequired
+  },
+  render: function() {
+    for(var i=0; i<this.props.image.amount; i++){
+      return (<div class={this.props.image.class}></div>);
+    }
   }
 });

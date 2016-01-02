@@ -79,6 +79,9 @@ App = React.createClass({
         <ul id="choice-bar">
           {this.renderLinks()}
         </ul>
+        <div id="card-body">
+          <div id="bgimg"></div>
+        </div>
       </div>
     );
   }
