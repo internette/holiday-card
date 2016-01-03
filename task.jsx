@@ -63,7 +63,7 @@ Image = React.createClass({
       picsContArr.push(<div className={'x'+ this.props.image.count}><ImageCont/></div>)
       //ReactDOM.render(newDiv, document.getElementById('card-pictures'));
     }
-    var picsBody = <div id="pictures">{picsContArr}</div>
+    var picsBody = <div id="pictures">{picsContArr}<textarea id="greetings" placeholder="Place Greetings Here"></textarea></div>
     ReactDOM.render(picsBody, document.getElementById('card-pictures'));
   },
   render: function() {
@@ -97,10 +97,10 @@ ImageCont = React.createClass({
   onChange: function(){
     if (ReactDOM.findDOMNode(this).files && ReactDOM.findDOMNode(this).files[0]) {
       var reader = new FileReader();
-      
+      $this = ReactDOM.findDOMNode(this);
       reader.onload = function (e) {
           //$('#blah').attr('src', e.target.result);
-          console.log(e.target.result);
+          $this.parentNode.style.backgroundImage = 'url('+e.target.result+')';
       }
       
         reader.readAsDataURL(ReactDOM.findDOMNode(this).files[0]);

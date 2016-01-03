@@ -59,12 +59,12 @@ html, body{
       }
       #card-body{
         background: #{$color}!important;
-        &.x1 #greetings{
+      }
+      .x1+#greetings{
           background: darken($color, 15%)!important;
         }
-        &.x3 #greetings{
-          background: darken($color, 15%)!important;
-        }
+      .x3+#greetings{
+        background: darken($color, 15%)!important;
       }
     }
   }
