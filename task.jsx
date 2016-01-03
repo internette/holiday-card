@@ -1,3 +1,8 @@
+picsContArr = [];
+//Random ID
+function randId() {
+  return Math.floor((Math.random() * 10000000) + 1);
+}
 // Task component - represents a single todo item
 Link = React.createClass({
   propTypes: {
@@ -31,6 +36,9 @@ BG = React.createClass({
   changeBG: function(e,f) {
     e.preventDefault();
     document.getElementById('bgimg').className = this.props.image.id;
+    for(var i=0; i<document.querySelectorAll('#choice-bar ul').length; i++){
+      document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
+    }
   },
   render: function() {
     return (
@@ -46,11 +54,17 @@ Image = React.createClass({
   },
   renderImg: function(e,f) {
     e.preventDefault();
-    for(var i=0; i<this.props.image.count; i++){
-      var newDiv = document.createElement('div');
-      newDiv.className=this.props.image.id;
-      document.getElementById('card-body').appendChild(newDiv);
+    picsContArr = [];
+    for(var i=0; i<document.querySelectorAll('#choice-bar ul').length; i++){
+      document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
     }
+    for(var j=0; j<this.props.image.count; j++){
+      //picsContArr.push(<div className={'x'+this.props.image.count}><input onChange={this.onChange} type="file"/></div>);
+      picsContArr.push(<div className={'x'+ this.props.image.count}><ImageCont/></div>)
+      //ReactDOM.render(newDiv, document.getElementById('card-pictures'));
+    }
+    var picsBody = <div id="pictures">{picsContArr}</div>
+    ReactDOM.render(picsBody, document.getElementById('card-pictures'));
   },
   render: function() {
     return (
@@ -80,14 +94,21 @@ ColorPicker = React.createClass({
   }
 });
 ImageCont = React.createClass({
-  propTypes: {
-    // This component gets the task to display through a React prop.
-    // We can use propTypes to indicate it is required
-    imageCont: React.PropTypes.object.isRequired
+  onChange: function(){
+    if (ReactDOM.findDOMNode(this).files && ReactDOM.findDOMNode(this).files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function (e) {
+          //$('#blah').attr('src', e.target.result);
+          console.log(e.target.result);
+      }
+      
+        reader.readAsDataURL(ReactDOM.findDOMNode(this).files[0]);
+    }
   },
   render: function() {
-    for(var i=0; i<this.props.image.count; i++){
-      return (<div class={this.props.image.id} ></div>);
-    }
+    return (
+      <input type="file" onChange={this.onChange}/>
+      );
   }
 });

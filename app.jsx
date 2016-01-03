@@ -84,6 +84,8 @@ App = React.createClass({
         </ul>
         <div id="card-body">
           <div id="bgimg"></div>
+          <div id="card-pictures">
+          </div>
         </div>
       </div>
     );
