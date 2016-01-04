@@ -12,7 +12,17 @@ var Wrap = React.createClass({
         }
     }
 });
-App = React.createClass({
+Layout = React.createClass({
+  render() {
+    return (
+      <div className="container">
+        {this.props.content}
+      </div>
+    );
+  }
+});
+Card = React.createClass({
+  mixins: [ReactMeteorData],
   getLinks(){
     return [
       { id: 'finished', label: "See Finished", class: "toplevel" },
@@ -52,7 +62,7 @@ App = React.createClass({
   },
   renderFonts(){
     return this.getFontsList().map((link) => {
-      return <Wrap><Link key={link.id} link={link} text={link.label}/></Wrap>;
+      return <Wrap><FontChange key={link.id} link={link} text={link.label}/></Wrap>;
     });
   },
   renderImages(){
@@ -63,22 +73,28 @@ App = React.createClass({
   renderLinks() {
     return this.getLinks().map((link) => {
         if(link.class === 'toplevel' && link.id==='choose-amount'){
-          return <Wrap id="pic-amount"><Link key={link.id} link={link} text={link.label} onclick={link.onclick}/><ul id={link.id}>{this.renderPics()}</ul></Wrap>;
+          return <Wrap id="pic-amount"><Link key={link.id} link={link} text={link.label}/><ul id={link.id}>{this.renderPics()}</ul></Wrap>;
         } else if(link.class === 'toplevel' && link.id==='choose-font'){
           return <Wrap id="fonts"><Link key={link.id} link={link} text={link.label}/><ul id={link.id}>{this.renderFonts()}</ul></Wrap>;
         } else if(link.class === 'toplevel' && link.id==='choose-bg'){
           return <Wrap id="bgs"><Link key={link.id} link={link} text={link.label}/><ul id={link.id}>{this.renderImages()}</ul></Wrap>;
         } else if (link.class === 'toplevel' && link.id === 'custom-color'){
-          return <ColorPicker key={link.id} picker={link}/>
+          return <ColorPicker key={link.id} picker={link}/>;
+        } else if (link.class === 'toplevel' && link.id === 'finished'){
+          return <Finished key={link.id} link={link} text={link.label}/>;
         } else if (link.class === 'toplevel'){
           return <Link key={link.id} link={link} text={link.label}/>;
         }
     });
   },
- 
+  getMeteorData() {
+    return {
+      cards: Cards.find({}).fetch()
+    }
+  },
   render() {
     return (
-      <div className="container">
+      <div>
         <ul id="choice-bar">
           {this.renderLinks()}
         </ul>

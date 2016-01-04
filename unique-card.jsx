@@ -34,6 +34,20 @@ Finished = React.createClass({
   },
   finishthis: function(e){
     e.preventDefault();
+
+  },
+  render: function() {
+    return (
+      <a href="#" id={this.props.link.id} onClick={this.finishthis}>{this.props.link.label}</a>
+    );
+  }
+});
+Toggle = React.createClass({
+  propType: {
+    link: React.PropTypes.object.isRequired
+  },
+  finishthis: function(e){
+    e.preventDefault();
   },
   render: function() {
     return (
