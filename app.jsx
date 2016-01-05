@@ -80,6 +80,8 @@ Card = React.createClass({
           return <Wrap id="bgs"><Link key={link.id} link={link} text={link.label}/><ul id={link.id}>{this.renderImages()}</ul></Wrap>;
         } else if (link.class === 'toplevel' && link.id === 'custom-color'){
           return <ColorPicker key={link.id} picker={link}/>;
+        } else if (link.class === 'toplevel' && link.id === 'hide-bar'){
+          return <Hide key={link.id} link={link} text={link.label}/>;
         } else if (link.class === 'toplevel' && link.id === 'finished'){
           return <Finished key={link.id} link={link} text={link.label}/>;
         } else if (link.class === 'toplevel'){

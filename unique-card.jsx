@@ -28,6 +28,25 @@ Link = React.createClass({
     );
   }
 });
+Hide = React.createClass({
+  propTypes: {
+    // This component gets the task to display through a React prop.
+    // We can use propTypes to indicate it is required
+    link: React.PropTypes.object.isRequired
+  },
+  hideThings: function(e,f) {
+    e.preventDefault();
+    for(var i=0; i<document.querySelectorAll('#choice-bar ul').length; i++){
+      document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
+    }
+    document.querySelector('#choice-bar').style.display='none';
+  },
+  render: function() {
+    return (
+      <a href="#" id={this.props.link.id} onClick={this.hideThings}>{this.props.link.label}</a>
+    );
+  }
+});
 Finished = React.createClass({
   propType: {
     link: React.PropTypes.object.isRequired
