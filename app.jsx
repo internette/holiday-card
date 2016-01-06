@@ -89,6 +89,9 @@ Card = React.createClass({
         }
     });
   },
+  renderModal(){
+    return <Modal/>
+  },
   getMeteorData() {
     return {
       cards: Cards.find({}).fetch()
@@ -105,6 +108,7 @@ Card = React.createClass({
           <div id="card-pictures">
           </div>
         </div>
+        {this.renderModal()}
       </div>
     );
   }
