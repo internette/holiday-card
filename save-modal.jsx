@@ -9,10 +9,9 @@ Modal = React.createClass({
           <div id="modal-container">
             <h3>Save Card</h3>
             <form id="save-card" onSubmit={this.submitForm}>
-              <input type="text" id="cardname"/>
-              <input type="text" id="username"/>
-              <input type="text" id="send-to"/>
-              <input type="submit" id="send-card" value="Send Card"/>
+                <div className="save-card-input"><label for="cardname">Card Name</label><input type="text" id="cardname"/></div>
+                <div className="save-card-input"><label for="username">Your Name</label><input type="text" id="username"/></div>
+              <input type="submit" id="send-card" value="Share My Card"/>
             </form>
           </div>
         </div>

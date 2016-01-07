@@ -53,7 +53,7 @@ Finished = React.createClass({
   },
   finishthis: function(e){
     e.preventDefault();
-
+    $('#modal').show();
   },
   render: function() {
     return (
