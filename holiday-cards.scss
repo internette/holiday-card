@@ -78,6 +78,7 @@ input{
   top: 0;
   left: 0;
   z-index: 3;
+  display: none;
   #overlay{
     z-index: 1;
     background: rgba(0,0,0,0.6);
@@ -346,10 +347,19 @@ div{
   line-height: 0.5em!important;
   padding-top: 0.9em!important;
 }
-#pictures>div{
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+#pictures{
+  &.x1, &.x2, &.x3, &.x4{
+    width:100%!important;
+    height: 100%!important;
+    border: 0!important;
+    padding: 0!important;
+    margin: 0!important;
+  }
+  &>div{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
 }
 #bgs{
   li{

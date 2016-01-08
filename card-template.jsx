@@ -1,4 +1,16 @@
-CardTemplate = React.createClass({
+TestLink = React.createClass({
+  propTypes: {
+    // This component gets the task to display through a React prop.
+    // We can use propTypes to indicate it is required
+    card: React.PropTypes.object.isRequired
+  },
+  render: function() {
+    return (
+      <a href="#" id={this.props.card._id}>{this.props.card.message}</a>
+    );
+  }
+});
+CardThumbTemplate = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.
     // We can use propTypes to indicate it is required

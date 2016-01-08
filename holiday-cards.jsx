@@ -5,6 +5,12 @@ if(Meteor.isClient){
 		//ReactDOM.render(<App />, document.getElementById("render-target"));
 	});
 }
+if (Meteor.isServer) {
+  // Only publish tasks that are public or belong to the current user
+  Meteor.publish("single-card", function (thisid) {
+    return Cards.find({_id: thisid});
+   })
+}
 FlowRouter.route('/', {
   name: 'home',
   action() {

@@ -3,7 +3,6 @@ var picsContArr = [], imageCount, images=[];
 function randId() {
   return Math.floor((Math.random() * 10000000) + 1);
 }
-
 // Task component - represents a single todo item
 Link = React.createClass({
   propTypes: {
@@ -125,11 +124,9 @@ Image = React.createClass({
       document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
     }
     for(var j=0; j<this.props.image.count; j++){
-      //picsContArr.push(<div className={'x'+this.props.image.count}><input onChange={this.onChange} type="file"/></div>);
       picsContArr.push(<div className={'x'+ this.props.image.count}><ImageCont/></div>)
-      //ReactDOM.render(newDiv, document.getElementById('card-pictures'));
     }
-    var picsBody = <div id="pictures">{picsContArr}<textarea id="greetings" placeholder="Place Greetings Here"></textarea></div>
+    var picsBody = <div id="pictures" className={'x'+this.props.image.count}>{picsContArr}<textarea id="greetings" placeholder="Place Greetings Here"></textarea></div>
     ReactDOM.render(picsBody, document.getElementById('card-pictures'));
   },
   render: function() {

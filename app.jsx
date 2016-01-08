@@ -113,3 +113,24 @@ Card = React.createClass({
     );
   }
 });
+CardTemplate = React.createClass({
+  mixins: [ReactMeteorData],
+  getMeteorData() {
+    Meteor.subscribe("single-card", window.location.pathname.replace('/',''));
+    return {
+      cards: Cards.find({}).fetch()
+    }
+  },
+  testLink(){
+    return this.data.cards.map((card) => {
+      return <TestLink key={card.id} card={card} message={card.message}/>;
+    });
+  },
+  render() {
+    return (
+      <div>
+        {this.testLink()}
+      </div>
+    );
+  }
+});
