@@ -4,9 +4,19 @@ TestLink = React.createClass({
     // We can use propTypes to indicate it is required
     card: React.PropTypes.object.isRequired
   },
+  componentDidMount: function(){
+    document.body.className = this.props.card.bgColor;
+  },
   render: function() {
     return (
-      <a href="#" id={this.props.card._id}>{this.props.card.message}</a>
+      <div>
+        <div id="card-body" className={this.props.card.fontChoice}>
+          <div id="bgimg" className={this.props.card.bgChoice}></div>
+          <textarea id="greetings" readOnly value={this.props.card.message}></textarea>
+          <div id="card-pictures">
+          </div>
+        </div>
+      </div>
     );
   }
 });

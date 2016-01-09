@@ -23,6 +23,7 @@ Modal = React.createClass({
     var cardId = 'card' + randId();
     var bgChoice = document.getElementById('bgimg').className;
     var message = document.getElementById('greetings').value;
+    var bgColor = document.body.className;
     Cards.insert({
       cardName: cName,
       username: userName,
@@ -32,6 +33,7 @@ Modal = React.createClass({
       bgChoice: bgChoice,
       cardId: cardId,
       message: message,
+      bgColor: bgColor,
       imgs: ''
     });
     this.setState({

@@ -123,7 +123,7 @@ CardTemplate = React.createClass({
   },
   testLink(){
     return this.data.cards.map((card) => {
-      return <TestLink key={card.id} card={card} message={card.message}/>;
+      return <TestLink key={card.id} card={card} mbgChoice={this.bgChoice} message={this.message} bgColor={this.bgColor}/>;
     });
   },
   render() {
