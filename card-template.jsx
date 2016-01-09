@@ -1,3 +1,4 @@
+var picsCont = [];
 TestLink = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.
@@ -6,13 +7,18 @@ TestLink = React.createClass({
   },
   componentDidMount: function(){
     document.body.className = this.props.card.bgColor;
+    picsCont = [];
+    for(var i=0; i<this.props.card.imgCount; i++){
+      picsCont.push(<div className={'x'+this.props.card.imgCount}>&nbsp;</div>);
+    }
+    var cardBody = <div id="pictures">{picsCont}<textarea id="greetings" readOnly value={this.props.card.message}></textarea></div>;
+    ReactDOM.render(cardBody, document.getElementById('card-pictures'));
   },
   render: function() {
     return (
       <div>
         <div id="card-body" className={this.props.card.fontChoice}>
           <div id="bgimg" className={this.props.card.bgChoice}></div>
-          <textarea id="greetings" readOnly value={this.props.card.message}></textarea>
           <div id="card-pictures">
           </div>
         </div>
