@@ -2,6 +2,8 @@
 function randId() {
   return Math.floor((Math.random() * 10000000) + 1);
 }
+//counter
+var counter = 0;
 Modal = React.createClass({
   getInitialState: function(){
     return {modalContent: <form id="save-card" onSubmit={this.submitForm}>
@@ -10,9 +12,6 @@ Modal = React.createClass({
                 <input type="submit" id="send-card" value="Share My Card"/>
             </form>
     }
-  },
-  getLink: function(thisid){
-    return ( window.location.host + '/' + Cards.findOne({cardId: thisid})._id);
   },
   submitForm: function(e){
     e.preventDefault();
@@ -24,6 +23,7 @@ Modal = React.createClass({
     var bgChoice = document.getElementById('bgimg').className;
     var message = document.getElementById('greetings').value;
     var bgColor = document.body.className;
+    var $this = this;
     Cards.insert({
       cardName: cName,
       username: userName,
@@ -35,12 +35,26 @@ Modal = React.createClass({
       message: message,
       bgColor: bgColor,
       imgs: images
-    });
-    this.setState({
-      modalContent: <div id="thank-you">
-        <p>Share your card with the link below</p>
-        <input id="share-link" value={this.getLink(cardId)} readOnly/>
-      </div>
+    }, function(e, res){
+      S3.upload({
+          files:images
+      },function(e,r){
+          // for(var i=0; i<images.length; i++){
+          //   images[i].url = r.url;
+          //   // if(r.file.original_name===images)
+          // }
+          counter += 1;
+          // images[counter-1].url = r.url;
+          var object = {};
+          object['imgs.'+(counter-1)+'.url'] = r.url;
+          Cards.update(res, {$set: object});
+          $this.setState({
+            modalContent: <div id="thank-you">
+              <p>Share your card with the link below</p>
+              <input id="share-link" value={window.location.host + '/' + res} readOnly/>
+            </div>
+          });
+      });
     });
   },
   render: function() {

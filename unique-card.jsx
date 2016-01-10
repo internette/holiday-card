@@ -179,6 +179,7 @@ ImageCont = React.createClass({
       }
       reader.readAsDataURL($this.files[0]);
       $this.files[0].position = Number($this.parentNode.id.replace('cont-',''));
+      $this.files[0].url = '';
       if(images.length<Number(document.querySelector('#pictures').className.replace('x',''))){
         images.push($this.files[0]);
       } else {
