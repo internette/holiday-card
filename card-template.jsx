@@ -9,7 +9,7 @@ TestLink = React.createClass({
     document.body.className = this.props.card.bgColor;
     picsCont = [];
     for(var i=0; i<this.props.card.imgCount; i++){
-      picsCont.push(<div className={'x'+this.props.card.imgCount}>&nbsp;</div>);
+      picsCont.push(<div className={'x'+this.props.card.imgCount} style={{backgroundImage: this.props.card.imgs[i]}}>&nbsp;</div>);
     }
     var cardBody = <div id="pictures">{picsCont}<textarea id="greetings" readOnly value={this.props.card.message}></textarea></div>;
     ReactDOM.render(cardBody, document.getElementById('card-pictures'));

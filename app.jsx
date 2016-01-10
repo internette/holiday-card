@@ -1,3 +1,5 @@
+// GLOBAL
+images = [];
 // App component - represents the whole app
 var Wrap = React.createClass({
     render: function() {
@@ -123,7 +125,7 @@ CardTemplate = React.createClass({
   },
   testLink(){
     return this.data.cards.map((card) => {
-      return <TestLink key={card.id} card={card} mbgChoice={this.bgChoice} message={this.message} bgColor={this.bgColor}/>;
+      return <TestLink key={card.id} card={card} bgChoice={this.bgChoice} message={this.message} bgColor={this.bgColor} imgCount={this.imgCount} imgs={this.imgs}/>;
     });
   },
   render() {

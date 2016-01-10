@@ -34,7 +34,7 @@ Modal = React.createClass({
       cardId: cardId,
       message: message,
       bgColor: bgColor,
-      imgs: ''
+      imgs: images
     });
     this.setState({
       modalContent: <div id="thank-you">

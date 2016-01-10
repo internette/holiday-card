@@ -1,4 +1,15 @@
-var picsContArr = [], imageCount, images=[];
+var picsContArr = [], imageCount;
+//Remove based on Position
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
 //Random ID
 function randId() {
   return Math.floor((Math.random() * 10000000) + 1);
@@ -124,7 +135,7 @@ Image = React.createClass({
       document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
     }
     for(var j=0; j<this.props.image.count; j++){
-      picsContArr.push(<div className={'x'+ this.props.image.count}><ImageCont/></div>)
+      picsContArr.push(<div className={'x'+ this.props.image.count} id={'cont-'+j}><ImageCont/></div>)
     }
     var picsBody = <div id="pictures" className={'x'+this.props.image.count}>{picsContArr}<textarea id="greetings" placeholder="Place Greetings Here"></textarea></div>
     ReactDOM.render(picsBody, document.getElementById('card-pictures'));
@@ -158,6 +169,7 @@ ColorPicker = React.createClass({
 });
 ImageCont = React.createClass({
   onChange: function(){
+
     if (ReactDOM.findDOMNode(this).files && ReactDOM.findDOMNode(this).files[0]) {
       var reader = new FileReader();
       $this = ReactDOM.findDOMNode(this);
@@ -165,8 +177,14 @@ ImageCont = React.createClass({
           //$('#blah').attr('src', e.target.result);
           $this.parentNode.style.backgroundImage = 'url('+e.target.result+')';
       }
-      
-        reader.readAsDataURL(ReactDOM.findDOMNode(this).files[0]);
+      reader.readAsDataURL($this.files[0]);
+      $this.files[0].position = Number($this.parentNode.id.replace('cont-',''));
+      if(images.length<Number(document.querySelector('#pictures').className.replace('x',''))){
+        images.push($this.files[0]);
+      } else {
+        removeA(images, images[$this.files[0].position]);
+        images.push($this.files[0]);
+      }
     }
   },
   render: function() {

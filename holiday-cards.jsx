@@ -6,6 +6,11 @@ if(Meteor.isClient){
 	});
 }
 if (Meteor.isServer) {
+	S3.config = {
+	    key: 'AKIAJT2YZVTMJWZWIADA',
+	    secret: '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',
+	    bucket: 'holiday-cards'
+	};
   // Only publish tasks that are public or belong to the current user
   Meteor.publish("single-card", function (thisid) {
     return Cards.find({_id: thisid});
