@@ -110,6 +110,7 @@ Card = React.createClass({
           <div id="card-pictures">
           </div>
         </div>
+        <canvas id="test"></canvas>
         {this.renderModal()}
       </div>
     );
