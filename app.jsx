@@ -119,20 +119,21 @@ Card = React.createClass({
 CardTemplate = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
-    Meteor.subscribe("single-card", window.location.pathname.replace('/',''));
-    return {
-      cards: Cards.find({}).fetch()
+    var data = {};
+    var cardID = this.props.id;
+    var handle = Meteor.subscribe('single-card', cardID);
+    if(handle.ready()) {
+      data.cards = Cards.findOne({_id: cardID});
     }
+    return data;
   },
-  testLink(){
-    return this.data.cards.map((card) => {
-      return <TestLink key={card.id} card={card} bgChoice={this.bgChoice} message={this.message} bgColor={this.bgColor} imgCount={this.imgCount} imgs={this.imgs}/>;
-    });
+  getContent() {
+    return <TestLink key={this.data.cards.id} card={this.data.cards} bgChoice={this.data.cards.bgChoice} message={this.data.cards.message} bgColor={this.data.cards.bgColor} imgCount={this.data.cards.imgCount} imgs={this.data.cards.imgs}/>;
   },
   render() {
     return (
       <div>
-        {this.testLink()}
+        {this.data.cards? this.getContent() : <p>Loading...</p>}
       </div>
     );
   }
