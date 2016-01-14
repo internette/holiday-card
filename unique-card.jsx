@@ -122,6 +122,31 @@ BG = React.createClass({
     );
   }
 });
+BGUpload = React.createClass({
+  propTypes: {
+    // This component gets the task to display through a React prop.
+    // We can use propTypes to indicate it is required
+    image: React.PropTypes.object.isRequired
+  },
+  onChange: function(){
+    if (ReactDOM.findDOMNode(this).files && ReactDOM.findDOMNode(this).files[0]) {
+      var reader = new FileReader();
+      $this = ReactDOM.findDOMNode(this);
+      reader.onload = function (e) {
+          //$('#blah').attr('src', e.target.result);
+          $this.parentNode.style.backgroundImage = 'url('+e.target.result+')';
+      }
+      reader.readAsDataURL($this.files[0]);
+      $this.files[0].url = '';
+      bgImg = $this.files[0];
+    }
+  },
+  render: function() {
+    return (
+      <li id="bgImg"><input type="file" onChange={this.onChange}/></li>
+    );
+  }
+});
 Image = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.

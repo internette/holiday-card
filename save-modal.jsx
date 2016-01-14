@@ -13,6 +13,13 @@ Modal = React.createClass({
             </form>
     }
   },
+  // componentDidMount: function(){
+  //   html2canvas(document.body, {
+  //     onrendered: function(canvas) {
+  //       document.body.appendChild(canvas);
+  //     }
+  //   });
+  // },
   submitForm: function(e){
     e.preventDefault();
     var cName = document.getElementById('cardname').value;
@@ -39,12 +46,7 @@ Modal = React.createClass({
       S3.upload({
           files:images
       },function(e,r){
-          // for(var i=0; i<images.length; i++){
-          //   images[i].url = r.url;
-          //   // if(r.file.original_name===images)
-          // }
           counter += 1;
-          // images[counter-1].url = r.url;
           var object = {};
           object['imgs.'+(counter-1)+'.url'] = r.url;
           Cards.update(res, {$set: object});

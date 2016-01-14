@@ -14,11 +14,14 @@ if (Meteor.isServer) {
   // Only publish tasks that are public or belong to the current user
   Meteor.publish("single-card", function (thisid) {
     return Cards.find({_id: thisid});
+   });
+  Meteor.publish("all-cards", function () {
+    return Cards.find();
    })
 }
 FlowRouter.route('/', {
   name: 'home',
-  action() {
+  action(params) {
     ReactLayout.render(Layout, {content: <AllCards />});
   }
 });
@@ -30,7 +33,7 @@ FlowRouter.route('/create-new', {
 });
 FlowRouter.route('/:id', {
   name: 'cards',
-  action() {
-    ReactLayout.render(Layout, {content: <CardTemplate />});
+  action(params) {
+    ReactLayout.render(Layout, {content: <CardTemplate {...params}/>});
   }
 });
