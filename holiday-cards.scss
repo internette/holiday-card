@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Dancing+Script:700|Berkshire+Swash);
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script:700|Berkshire+Swash|Karla:400,700);
 *{
   outline: none;
 }
@@ -8,6 +8,8 @@ html, body{
   z-index:-2;
   height: 100%;
   width: 100%;
+  font-family: 'Karla', sans-serif;
+  font-size: 400;
 }
 .container{
   height: 100%;
@@ -568,14 +570,14 @@ div{
   #create-new{
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 20%;
     left: 0;
-    color: #FFF;
+    color: #000;
     display: block;
-    background: rgba(0,0,0,0.7);
     text-align: center;
     text-decoration: none;
-    padding: 0.5em 0;
-    font-size: 2em;
+    padding: 0.7em 0;
+    font-size: 1.75em;
+    font-weight: 700;
   }
 }
