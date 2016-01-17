@@ -28,44 +28,24 @@ TestLink = React.createClass({
 });
 CardThumbTemplate = React.createClass({
   propTypes: {
-    // This component gets the task to display through a React prop.
-    // We can use propTypes to indicate it is required
     card: React.PropTypes.object.isRequired
   },
-  // showDetails:function(){
-  //   // React.findDOMNode(this).find('div.hover').style.top = '0';
-  //   // React.findDOMNode(this).find('div.hover').style.height = '100%';
-  //   this.refs.hover.style.top = '0';
-  //   this.refs.hover.style.height = '100%';
-    
-  // },
-  // hideDetails:function(){
-  //   // React.findDOMNode(this).find('div.hover').style.top = '0';
-  //   // React.findDOMNode(this).find('div.hover').style.height = '100%';
-  //   this.refs.hover.style.top = '100%';
-  //   this.refs.hover.style.height = '0';
-    
-  // },
   showDetails: function(){
-    document.getElementById('card-name').innerHTML = this.props.card.cardName;
-    document.getElementById('card-creator').innerHTML = this.props.card.username;
+    this.refs.cname.innerHTML = '';
+    this.refs.creator.innerHTML = '';
   },
   hideDetails: function(){
-    document.getElementById('card-name').innerHTML = '';
-    document.getElementById('card-creator').innerHTML = '';
+    this.refs.cname.innerHTML = this.props.card.cardName;
+    this.refs.creator.innerHTML = this.props.card.username;
   },
   render: function() {
     return (
-      // <li className="card-link"><a href={'/'+this.props.card._id} id={this.props.card._id}>{this.props.card.cardName} <span className="creator">{'by '+this.props.card.username}</span></a></li>
-      // <li className="card-link" onMouseEnter={this.showDetails} onMouseLeave={this.hideDetails}><iframe src={'/'+this.props.card._id}/><div className="hover" ref="hover"><span className="card-name">{this.props.card.cardName}</span><span className="byAttr">by: {this.props.card.username}</span><a href={'/'+this.props.card._id} className="viewcard-link">View Card</a></div></li>
-      <li className="card-link" onMouseEnter={this.showDetails} onMouseLeave={this.hideDetails}><iframe src={'/'+this.props.card._id}/></li>
+      <li className="card-link" onMouseEnter={this.showDetails} onMouseLeave={this.hideDetails}><a href={'/'+this.props.card._id}><span ref="cname" id="card-name">{this.props.card.cardName}</span><span ref="creator" id="card-creator">{'by: ' + this.props.card.username}</span></a><iframe src={'/'+this.props.card._id}/></li>
     );
   }
 });
 Button = React.createClass({
   propTypes: {
-    // This component gets the task to display through a React prop.
-    // We can use propTypes to indicate it is required
     button: React.PropTypes.object.isRequired
   },
   render: function() {

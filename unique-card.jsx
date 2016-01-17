@@ -185,6 +185,7 @@ ColorPicker = React.createClass({
         change:function(color){
           backgroundColor = color.toHexString();
           $('body').attr('class', 'c'+backgroundColor.replace('#',''));
+          document.body.style.backgroundColor = backgroundColor;
         }
     });
   },

@@ -15,7 +15,7 @@ var Wrap = React.createClass({
 AllCards = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
-    Meteor.subscribe("all-cards");
+    Meteor.subscribe("all-cards", 9, 0);
     return {
       cards: Cards.find({}).fetch()
     }
@@ -38,11 +38,10 @@ AllCards = React.createClass({
   render() {
     return (
       <div id="all-cards">
-        <div id="details">
-          <div id="card-name"></div>
-          <div id="card-creator"></div>
+        <ul id="top-nav">
+          <h3>Holiday Cards</h3>
           {this.renderButton()}
-        </div>
+        </ul>
         <ul id="card-thumbs">
           {this.data.cards? this.renderCards() : <p>Loading...</p>}
         </ul>

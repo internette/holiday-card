@@ -15,8 +15,8 @@ if (Meteor.isServer) {
   Meteor.publish("single-card", function (thisid) {
     return Cards.find({_id: thisid});
    });
-  Meteor.publish("all-cards", function () {
-    return Cards.find();
+  Meteor.publish("all-cards", function (limitThis, skipThis) {
+    return Cards.find({},{limit: limitThis, skip: skipThis});
    })
 }
 FlowRouter.route('/', {

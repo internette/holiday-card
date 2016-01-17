@@ -67,6 +67,7 @@ Modal = React.createClass({
             <ExitModal />
             <h3>Save Card</h3>
             {this.state.modalContent}
+            <canvas id="test"></canvas>
           </div>
         </div>
       );
