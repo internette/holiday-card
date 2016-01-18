@@ -484,6 +484,43 @@ div{
   height: 100%;
   padding: 0;
   box-sizing: border-box;
+  #top-nav{
+    background: #FFF;
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    height: 3%;
+    padding: 1%;
+    color: #000;
+    h3{
+      margin: 0;
+      line-height: 0.8em;
+      display: inline-block;
+    }
+    ul{
+      position: relative;
+      float: right;
+      top: 0;
+      width: auto;
+      height: auto;
+      li{
+        border: 0;
+        width: auto;
+        a{
+          background: #FFF;
+          position:relative;
+          color: #000;
+          text-decoration: none;
+          line-height: 0.9em;
+          color: #000;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
   ul{
     margin: 0;
     padding: 0;
@@ -493,6 +530,7 @@ div{
     top: 5%;
     width: 100%;
     height: 95%;
+    overflow-y: auto;
     li{
       /*width: 22%;*/
       /*height: 20%;*/
@@ -518,11 +556,10 @@ div{
         background: rgba(0,0,0,0.7);
         text-decoration: none;
         box-sizing: border-box;
+        float: right;
+        margin: 0;
         &:hover{
           background: rgba(0,0,0,0);
-          span{
-            opacity: 0;
-          }
         }
         span{
           display: block;
@@ -565,7 +602,7 @@ div{
     }
   }
   #create-new{
-    position: fixed;
+    /*position: fixed;
     bottom: 0;
     width: 20%;
     left: 0;
@@ -576,6 +613,6 @@ div{
     padding: 0.7em 0;
     font-size: 1.75em;
     font-weight: 700;
-    float: none;
+    float: none;*/
   }
 }

@@ -15,9 +15,9 @@ var Wrap = React.createClass({
 AllCards = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
-    Meteor.subscribe("all-cards", 9, 0);
+    Meteor.subscribe("all-cards");
     return {
-      cards: Cards.find({}).fetch()
+      cards: Cards.find({},{limit: 9, skip: 0}).fetch()
     }
   },
   getButton(){
@@ -35,13 +35,21 @@ AllCards = React.createClass({
       return <Button key={button._id} button={button} label={button.label}/>;
     });
   },
+  loadCount (skipCount){
+    return this.setState({
+        skipCount: skipCount
+      });
+  },
   render() {
     return (
       <div id="all-cards">
-        <ul id="top-nav">
+        <div id="top-nav">
           <h3>Holiday Cards</h3>
-          {this.renderButton()}
-        </ul>
+          <ul>
+            <li><a onClick={this.loadCount()}>Load More</a></li>
+            <li>{this.renderButton()}</li>
+          </ul>
+        </div>
         <ul id="card-thumbs">
           {this.data.cards? this.renderCards() : <p>Loading...</p>}
         </ul>
