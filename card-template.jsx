@@ -9,10 +9,15 @@ TestLink = React.createClass({
     document.body.className = this.props.card.bgColor;
     picsCont = [];
     for(var i=0; i<this.props.card.imgCount; i++){
-      picsCont.push(<div className={'x'+this.props.card.imgCount} style={{backgroundImage: 'url(' + this.props.card.imgs[i].url + ')'}}>&nbsp;</div>);
+      if(this.props.card.imgCount === '1'){
+        picsCont.push(<div className={'x'+this.props.card.imgCount} style={{backgroundImage: 'url(' + this.props.card.imgs[i].url + ')'}}><div id="divider"></div></div>)
+      } else {
+        picsCont.push(<div className={'x'+this.props.card.imgCount} style={{backgroundImage: 'url(' + this.props.card.imgs[i].url + ')'}}>&nbsp;</div>)
+      }
     }
-    var cardBody = <div id="pictures">{picsCont}<textarea id="greetings" readOnly value={this.props.card.message}></textarea></div>;
+    var cardBody = <div id="pictures" className={'x'+this.props.card.imgCount}>{picsCont}<textarea id="greetings" readOnly value={this.props.card.message}></textarea></div>;
     ReactDOM.render(cardBody, document.getElementById('card-pictures'));
+    document.getElementById('divider').style.bottom = (Number(getComputedStyle(document.getElementById('greetings')).height.replace('px',''))-10)+'px';
   },
   render: function() {
     return (

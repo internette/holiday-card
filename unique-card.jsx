@@ -109,6 +109,9 @@ FontChange = React.createClass({
       document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
     }
     document.getElementById('card-body').className = this.props.link.id;
+    if(document.getElementById('divider') !== null || document.getElementById('divider') !== 'null'){
+      document.getElementById('divider').style.bottom = (Number(getComputedStyle(document.getElementById('greetings')).height.replace('px','')) - 10) + 'px';
+    }
   },
   render: function() {
     return (
@@ -186,7 +189,7 @@ Image = React.createClass({
     }
     var picsBody = <div id="pictures" className={'x'+this.props.image.count}>{picsContArr}<textarea id="greetings" placeholder="Place Greetings Here"></textarea></div>
     ReactDOM.render(picsBody, document.getElementById('card-pictures'));
-    document.getElementById('divider').style.top = document.getElementById('greetings').offsetTop - 70 + 'px';
+    document.getElementById('divider').style.bottom = Number(getComputedStyle(document.getElementById('greetings')).height.replace('px',''))-10+'px';
   },
   render: function() {
     return (
