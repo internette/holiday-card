@@ -54,16 +54,3 @@ Button = React.createClass({
     );
   }
 });
-LoadMore = React.createClass({
-  propTypes: {
-    button: React.PropTypes.object.isRequired
-  },
-  getMore: function(){
-    skip += 9;
-  },
-  render: function() {
-    return (
-      <a href='#' id={this.props.button.id} onClick={this.getMore}>{this.props.button.label}</a>
-    );
-  }
-});

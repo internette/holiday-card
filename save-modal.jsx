@@ -5,21 +5,24 @@ function randId() {
 //counter
 var counter = 0;
 Modal = React.createClass({
+  inputs: function(){
+    return [
+      { id: 'cardname', label: 'Card Name', idKey: 'id-1', labelKey: 'key-1'},
+      { id: 'username', label: 'Your Name', idKey: 'id-2', labelKey: 'key-2'}
+    ]
+  },
+  renderInputs: function(){
+    return this.inputs().map((input) => {
+      return <div className="save-card-input"><FormInput key={input.idKey} input={input} id={input.id} label={input.label}/><FormLabel key={input.labelKey} input={input} id={input.id} label={input.label}/></div>
+    });
+  },
   getInitialState: function(){
     return {modalContent: <form id="save-card" onSubmit={this.submitForm}>
-                <div className="save-card-input"><label for="cardname">Card Name</label><input type="text" id="cardname"/></div>
-                <div className="save-card-input"><label for="username">Your Name</label><input type="text" id="username"/></div>
+                {this.renderInputs()}
                 <input type="submit" id="send-card" value="Share My Card"/>
             </form>
     }
   },
-  // componentDidMount: function(){
-  //   html2canvas(document.body, {
-  //     onrendered: function(canvas) {
-  //       document.body.appendChild(canvas);
-  //     }
-  //   });
-  // },
   submitForm: function(e){
     e.preventDefault();
     var cName = document.getElementById('cardname').value;
@@ -52,7 +55,11 @@ Modal = React.createClass({
           Cards.update(res, {$set: object});
           $this.setState({
             modalContent: <div id="thank-you">
-              <p>Share your card with the link below</p>
+              <p><b>To share your card:</b></p>
+              <ol>
+                <li>Copy the <u>whole</u> link below</li>
+                <li>Share that link with your friends</li>
+              </ol>
               <input id="share-link" value={window.location.host + '/' + res} readOnly/>
             </div>
           });
@@ -67,7 +74,6 @@ Modal = React.createClass({
             <ExitModal />
             <h3>Save Card</h3>
             {this.state.modalContent}
-            <canvas id="test"></canvas>
           </div>
         </div>
       );
@@ -82,5 +88,36 @@ ExitModal = React.createClass({
     return (
         <a href="#" className="exit-modal" onClick={this.hideModal}>&times;</a>
       );
+  }
+});
+FormInput = React.createClass({
+  propTypes: {
+    input: React.PropTypes.object.isRequired
+  },
+  focusEffect: function(){
+    this.refs.input.parentNode.className = 'save-card-input active';
+  },
+  blurEffect: function(){
+    this.refs.input.parentNode.className = 'save-card-input';
+    if(this.refs.input.value.length>0){
+      this.refs.input.nextSibling.style.color = '#000';
+    } else {
+      this.refs.input.nextSibling.style.color = 'red';
+    }
+  },
+  render: function(){
+    return (
+      <input type="text" id={this.props.input.id} onFocus={this.focusEffect} onBlur={this.blurEffect} ref="input"/>
+    );
+  }
+});
+FormLabel = React.createClass({
+  propTypes: {
+    input: React.PropTypes.object.isRequired
+  },
+  render: function(){
+    return (
+      <label for={this.props.input.id}>{this.props.input.label}</label>
+    );
   }
 });

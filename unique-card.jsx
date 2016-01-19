@@ -1,4 +1,4 @@
-var picsContArr = [], imageCount;
+var picsContArr = [], imageCount, toggleCounter = 0;
 //Remove based on Position
 function removeA(arr) {
     var what, a = arguments, L = a.length, ax;
@@ -24,7 +24,9 @@ Link = React.createClass({
   showDropdown: function(e,f) {
     e.preventDefault();
     for(var i=0; i<document.querySelectorAll('#choice-bar ul').length; i++){
-      document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
+      if (document.querySelectorAll('#choice-bar ul')[i].id !== this.props.link.id){
+        document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
+      }
     }
     if(document.querySelector('#choice-bar ul#'+this.props.link.id).style.display === 'block'){
       document.querySelector('#choice-bar ul#'+this.props.link.id).style.display = 'none';
@@ -44,16 +46,27 @@ Hide = React.createClass({
     // We can use propTypes to indicate it is required
     link: React.PropTypes.object.isRequired
   },
-  hideThings: function(e,f) {
+  toggleShow: function(e,f) {
     e.preventDefault();
-    for(var i=0; i<document.querySelectorAll('#choice-bar ul').length; i++){
-      document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
+    if(document.querySelector('#choice-bar a:last-of-type').id === 'hide-bar'){
+      for(var i=0; i<document.querySelectorAll('#choice-bar > *:not(#custom-color)').length; i++){
+        document.querySelectorAll('#choice-bar > *:not(#custom-color)')[i].style.display = 'none';
+      }
+      document.querySelector('#choice-bar #hide-bar').style.display='block';
+      document.querySelector('#choice-bar #hide-bar').innerHTML = 'Resume Editing';
+      document.querySelector('#choice-bar #hide-bar').id = 'show-bar';
+    } else {
+      for(var i=0; i<document.querySelectorAll('#choice-bar > *:not(#custom-color)').length; i++){
+        document.querySelectorAll('#choice-bar > *:not(#custom-color)')[i].style.display = 'inline-block';
+      }
+      document.querySelector('#choice-bar #show-bar').style.display='block';
+      document.querySelector('#choice-bar #show-bar').innerHTML = 'Hide Bar';
+      document.querySelector('#choice-bar #show-bar').id = 'hide-bar';
     }
-    document.querySelector('#choice-bar').style.display='none';
   },
   render: function() {
     return (
-      <a href="#" id={this.props.link.id} onClick={this.hideThings}>{this.props.link.label}</a>
+      <a href="#" id={this.props.link.id} onClick={this.toggleShow}>{this.props.link.label}</a>
     );
   }
 });

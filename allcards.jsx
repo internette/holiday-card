@@ -28,7 +28,7 @@ AllCards = React.createClass({
     // var cards = this.props.postId;
     var handle = Meteor.subscribe('all-cards');
     if(handle.ready()) {
-      data.cards = Cards.find({}, {limit: 9, skip: this.state.skipCount}).fetch();
+      data.cards = Cards.find({}, {limit: 6, skip: this.state.skipCount}).fetch();
     }
     return data;
   },
@@ -38,9 +38,16 @@ AllCards = React.createClass({
     ];
   },
   renderCards() {
-    return this.data.cards.map((card) => {
-      return <CardThumbTemplate key={card._id} id={card._id} card={card} cardName={card.cardName} username={card.username}/>;  
-    });
+    if(this.data.cards.length < 6){
+      document.getElementById('next').style.display = 'none';
+    }
+    if(this.data.cards.length<=0){
+      return <p>There are no more cards</p>
+    } else {
+      return this.data.cards.map((card) => {
+        return <CardThumbTemplate key={card._id} id={card._id} card={card} cardName={card.cardName} username={card.username}/>;  
+      });
+    }
   },
   renderButton(){
     return this.getButton().map((button) => {
@@ -49,20 +56,29 @@ AllCards = React.createClass({
   },
   seeMore (e, skipCount){
     e.preventDefault();
+    if(document.getElementById('prev').style.display==='none'){
+      document.getElementById('prev').style.display = 'block';
+    }
     this.setState({
-      skipCount: this.state.skipCount + 9
+      skipCount: this.state.skipCount + 6
     });
     this._meteorStateDep.changed();
   },
   seeLess (e, skipCount){
     e.preventDefault();
+    if(document.getElementById('next').style.display==='none'){
+      document.getElementById('next').style.display = 'block';
+    }
+    if(this.state.skipCount - 6 <= 0){
+      document.getElementById('prev').style.display = 'none';
+    }
     if(this.state.skipCount <= 0){
       this.setState({
         skipCount: 0
       });
     } else {
       this.setState({
-        skipCount: this.state.skipCount - 9
+        skipCount: this.state.skipCount - 6
       });
     }
     this._meteorStateDep.changed();
@@ -77,7 +93,7 @@ AllCards = React.createClass({
           </ul>
         </div>
         <ul id="card-thumbs">
-          <li id="prev"><a href="#" onClick={this.seeLess} id="prev-cards"></a></li>
+          <li id="prev" style={{display: 'none'}}><a href="#" onClick={this.seeLess} id="prev-cards"></a></li>
           {this.data.cards? this.renderCards() : <p>Loading...</p>}
           <li id="next"><a href="#" onClick={this.seeMore} id="next-cards"></a></li>
         </ul>
