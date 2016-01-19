@@ -1,4 +1,4 @@
-var picsContArr = [], imageCount, toggleCounter = 0;
+var picsContArr = [], imageCount, dividerBottom;
 //Remove based on Position
 function removeA(arr) {
     var what, a = arguments, L = a.length, ax;
@@ -166,6 +166,11 @@ Image = React.createClass({
     // We can use propTypes to indicate it is required
     image: React.PropTypes.object.isRequired
   },
+  getMargin: function(){
+    var greetOffset = document.getElementById('greetings').offsetTop;
+    //-70 because 60 (the padding) + the height of the divider
+    document.getElementById('divider').style.top = greetOffset - 70 + 'px';
+  },
   renderImg: function(e,f) {
     e.preventDefault();
     picsContArr = [];
@@ -173,10 +178,15 @@ Image = React.createClass({
       document.querySelectorAll('#choice-bar ul')[i].style.display = 'none';
     }
     for(var j=0; j<this.props.image.count; j++){
-      picsContArr.push(<div className={'x'+ this.props.image.count} id={'cont-'+j}><ImageCont/></div>)
+      if(this.props.image.count === 1){
+        picsContArr.push(<div className={'x'+ this.props.image.count} id={'cont-'+j}><ImageCont/><div id="divider"></div></div>)
+      } else {
+        picsContArr.push(<div className={'x'+ this.props.image.count} id={'cont-'+j}><ImageCont/></div>)
+      }
     }
     var picsBody = <div id="pictures" className={'x'+this.props.image.count}>{picsContArr}<textarea id="greetings" placeholder="Place Greetings Here"></textarea></div>
     ReactDOM.render(picsBody, document.getElementById('card-pictures'));
+    document.getElementById('divider').style.top = document.getElementById('greetings').offsetTop - 70 + 'px';
   },
   render: function() {
     return (
