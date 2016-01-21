@@ -23,6 +23,7 @@ Below are planned updates. I've broken down the updates into two groups: to get 
 
 Planned Updates:
 ----------------
+*  Private card options
 *  Write up instructions and post to GitHub
 *  Code in instructions
 *  Social Media share icons on the "Share" modal when finished creating an e-Card
