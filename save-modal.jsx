@@ -19,6 +19,7 @@ Modal = React.createClass({
   getInitialState: function(){
     return {modalContent: <form id="save-card" onSubmit={this.submitForm}>
                 {this.renderInputs()}
+                <label for="pubpriv">Make my card private</label><input type="checkbox" id="pubpriv" name="pubpriv"/>
                 <input type="submit" id="send-card" value="Share My Card"/>
             </form>
     }
@@ -34,6 +35,12 @@ Modal = React.createClass({
     var message = document.getElementById('greetings').value;
     var bgColor = document.body.className;
     var $this = this;
+    var pubPriv = '';
+    if(document.getElementById('pubpriv').checked){
+      pubPriv = 'private'
+    } else {
+      pubPriv = 'public'
+    }
     Cards.insert({
       cardName: cName,
       username: userName,
@@ -44,7 +51,8 @@ Modal = React.createClass({
       cardId: cardId,
       message: message,
       bgColor: bgColor,
-      imgs: images
+      imgs: images,
+      isPrivate: pubPriv
     }, function(e, res){
       S3.upload({
           files:images
