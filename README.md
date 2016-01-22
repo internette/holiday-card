@@ -21,9 +21,13 @@ Updates
 =======
 Below are planned updates. I've broken down the updates into two groups: to get done and want to get done. The "Planned Updates" will get done first and the "Longer Term Updates" will get done afterwards.
 
+1/21
+--------
+*  Private card options now exist. These cards are only viewable if you have the link to the card.
+
 Planned Updates:
 ----------------
-*  Private card options
+*  ~~Private card options~~
 *  Write up instructions and post to GitHub
 *  Code in instructions
 *  Social Media share icons on the "Share" modal when finished creating an e-Card
