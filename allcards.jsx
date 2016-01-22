@@ -28,7 +28,7 @@ AllCards = React.createClass({
     // var cards = this.props.postId;
     var handle = Meteor.subscribe('all-cards');
     if(handle.ready()) {
-      data.cards = Cards.find({isPrivate: 'public'}, {limit: 6, skip: this.state.skipCount}).fetch();
+      data.cards = Cards.find({}, {limit: 6, skip: this.state.skipCount}).fetch();
     }
     return data;
   },

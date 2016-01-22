@@ -37,9 +37,9 @@ Modal = React.createClass({
     var $this = this;
     var pubPriv = '';
     if(document.getElementById('pubpriv').checked){
-      pubPriv = 'private'
+      pubPriv = true
     } else {
-      pubPriv = 'public'
+      pubPriv = false
     }
     Cards.insert({
       cardName: cName,
