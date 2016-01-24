@@ -13,7 +13,10 @@ Modal = React.createClass({
   },
   renderInputs: function(){
     return this.inputs().map((input) => {
-      return <div className="save-card-input"><FormInput key={input.idKey} input={input} id={input.id} label={input.label}/><FormLabel key={input.labelKey} input={input} id={input.id} label={input.label}/></div>
+      return <div className="save-card-input">
+      <FormInput key={input.idKey} input={input} id={input.id} label={input.label}/>
+      <FormLabel key={input.labelKey} input={input} id={input.id} label={input.label}/>
+      </div>
     });
   },
   getInitialState: function(){
@@ -23,6 +26,17 @@ Modal = React.createClass({
                 <input type="submit" id="send-card" value="Share My Card"/>
             </form>
     }
+  },
+  socialMedia: function(){
+    return [
+      {id: 'facebook', url: 'https://www.facebook.com/sharer/sharer.php?&u=' + document.getElementById('share-link').value, name: 'facebook'},
+      {id: 'twitter', url: 'https://twitter.com/intent/tweet?url=' + document.getElementById('share-link').value + '&text=' + 'Check out the card I made: ' + window.location.href, name: 'twitter'},
+    ]
+  },
+  renderMedia: function(){
+    return this.socialMedia().map((input) => {
+      return <SocialMediaIcon key={input.id} input={input} id={input.name} url={input.url} name={input.name}/>
+    });
   },
   submitForm: function(e){
     e.preventDefault();
@@ -69,6 +83,9 @@ Modal = React.createClass({
                 <li>Share that link with your friends</li>
               </ol>
               <input id="share-link" value={window.location.host + '/' + res} readOnly/>
+              <div id="share-container">
+                {$this.renderMedia()}
+              </div>
             </div>
           });
       });
@@ -126,6 +143,16 @@ FormLabel = React.createClass({
   render: function(){
     return (
       <label for={this.props.input.id}>{this.props.input.label}</label>
+    );
+  }
+});
+SocialMediaIcon = React.createClass({
+  propTypes: {
+    input: React.PropTypes.object.isRequired
+  },
+  render: function(){
+    return (
+      <a href={this.props.input.url} id={this.props.input.name}></a>
     );
   }
 });
