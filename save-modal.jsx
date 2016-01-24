@@ -2,6 +2,7 @@
 function randId() {
   return Math.floor((Math.random() * 10000000) + 1);
 }
+var cid = randId(); 
 //counter
 var counter = 0;
 Modal = React.createClass({
@@ -27,15 +28,15 @@ Modal = React.createClass({
             </form>
     }
   },
-  socialMedia: function(){
+  socialMedia: function(res){
     return [
-      {id: 'facebook', url: 'https://www.facebook.com/sharer/sharer.php?&u=' + document.getElementById('share-link').value, name: 'facebook'},
-      {id: 'twitter', url: 'https://twitter.com/intent/tweet?url=' + document.getElementById('share-link').value + '&text=' + 'Check out the card I made: ' + window.location.href, name: 'twitter'},
+      {id: 'facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.origin + '/' + res, name: 'facebook'},
+      {id: 'twitter', url: 'https://twitter.com/intent/tweet?url=' + window.location.origin + '/' + res + '&text=' + 'Check out the card I made: ', name: 'twitter'},
     ]
   },
-  renderMedia: function(){
-    return this.socialMedia().map((input) => {
-      return <SocialMediaIcon key={input.id} input={input} id={input.name} url={input.url} name={input.name}/>
+  renderMedia: function(cardid){
+    return this.socialMedia(cardid).map((input) => {
+      return <SocialMediaIcon key={input.id} input={input} id={input.name} url={input.url} name={input.name} cardId={cardid}/>
     });
   },
   submitForm: function(e){
@@ -44,7 +45,7 @@ Modal = React.createClass({
     var userName = document.getElementById('username').value;
     var fontChoice = document.getElementById('card-body').className;
     var imgCount = document.getElementById('pictures').className.replace('x','');
-    var cardId = 'card' + randId();
+    var cardId = 'card' + cid;
     var bgChoice = document.getElementById('bgimg').className;
     var message = document.getElementById('greetings').value;
     var bgColor = document.body.className;
@@ -84,7 +85,8 @@ Modal = React.createClass({
               </ol>
               <input id="share-link" value={window.location.host + '/' + res} readOnly/>
               <div id="share-container">
-                {$this.renderMedia()}
+                <p><b>Or, click one of the social media share buttons below: </b></p>
+                {$this.renderMedia(res)}
               </div>
             </div>
           });
@@ -152,7 +154,9 @@ SocialMediaIcon = React.createClass({
   },
   render: function(){
     return (
-      <a href={this.props.input.url} id={this.props.input.name}></a>
+      <a href={this.props.input.url} id={this.props.input.name} target="_blank">
+        <img src={"images/"+this.props.input.name+'.png'}/>
+      </a>
     );
   }
 });
